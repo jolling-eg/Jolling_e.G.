@@ -109,6 +109,13 @@ EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
+
+ADMINS = [
+    ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL')),
+    ('Juntagrico', os.environ.get('JUNTAGRICO_DS_EMAIL'))
+]
+MANAGERS = ADMINS
+
 WHITELIST_EMAILS = []
 
 def whitelist_email_from_env(var_env_name):
