@@ -72,6 +72,7 @@ WSGI_APPLICATION = 'jolling.wsgi.application'
 
 
 LANGUAGE_CODE = 'de'
+CURRENCY = "EUR"
 
 SITE_ID = 1
 
