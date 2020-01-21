@@ -16,6 +16,8 @@ DEBUG = True #os.environ.get("JUNTAGRICO_DEBUG", 'True')=='True'
 
 ALLOWED_HOSTS = ['my.jolling.de','jolling.juntagrico.science', 'localhost',]
 
+BUSINESS_YEAR_START
+{"day":1,"month":3}
 
 # Application definition
 
@@ -165,7 +167,7 @@ ORGANISATION_ADDRESS = {"name":"Jolling e.G.",
             "city" : "Bad Endorf",
             "extra" : ""}
 ORGANISATION_BANK_CONNECTION = {
-            "IBAN" : "DE07711600000008186049",
+            "IBAN" : "DE07 7116 0000 0008 1860 49",
             "BIC" : "GENODEF1VRR",
             "NAME" : "Volksbank Raiffeisenbank Rosenheim-Chiemsee eG",
             "ESR" : ""}
