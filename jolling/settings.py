@@ -163,8 +163,8 @@ ORGANISATION_ADDRESS = {"name":"Jolling e.G.",
             "number" : "14",
             "zip" : "83093",
             "city" : "Bad Endorf",
-            "extra" : "xxx"}
-ORGANISATION_BANK_CONNECTION = {"PC" : "xxx",
+            "extra" : ""}
+ORGANISATION_BANK_CONNECTION = {"PC" : "",
             "IBAN" : "DE07711600000008186049",
             "BIC" : "GENODEF1VRR",
             "NAME" : "Volksbank Raiffeisenbank Rosenheim-Chiemsee eG",
