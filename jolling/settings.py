@@ -164,12 +164,12 @@ ORGANISATION_ADDRESS = {"name":"Jolling e.G.",
             "city" : "Bad Endorf",
             "extra" : "xxx"}
 ORGANISATION_BANK_CONNECTION = {"PC" : "xxx",
-            "IBAN" : "xxx",
-            "BIC" : "xxx",
-            "NAME" : "xxx",
+            "IBAN" : "DE07711600000008186049",
+            "BIC" : "GENODEF1VRR",
+            "NAME" : "Volksbank Raiffeisenbank Rosenheim-Chiemsee eG",
             "ESR" : ""}
 INFO_EMAIL = "info@jolling.de"
-SERVER_URL = "www.jolling.org"
+SERVER_URL = "www.jolling.de"
 ADMINPORTAL_NAME = "my.jolling.de"
 ADMINPORTAL_SERVER_URL = "my.jolling.de"
 SHARE_PRICE = "100"
