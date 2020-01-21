@@ -16,8 +16,6 @@ DEBUG = True #os.environ.get("JUNTAGRICO_DEBUG", 'True')=='True'
 
 ALLOWED_HOSTS = ['my.jolling.de','jolling.juntagrico.science', 'localhost',]
 
-BUSINESS_YEAR_START
-{"day":1, "month":3}
 
 # Application definition
 
