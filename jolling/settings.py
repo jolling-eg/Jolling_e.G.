@@ -29,10 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'jolling',
     'juntagrico',
-    'import_export'
+    'import_export',
     'fontawesomefree',
     'polymorphic',
-    'adminsortable2'
+    'adminsortable2',
     'impersonate',
     'crispy_forms',
 ]
