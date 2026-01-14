@@ -14,7 +14,30 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", 'False')=='True'
 
-ALLOWED_HOSTS = ['my.jolling.de','jolling.juntagrico.science', 'localhost',]
+ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science', 'localhost', 'jolling-staging.juntagrico.science']
+
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[%(asctime)s] %(levelname)s %(message)s'}
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
+}
 
 
 # Application definition
