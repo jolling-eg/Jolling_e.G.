@@ -27,10 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'jolling',
     'juntagrico',
+    'import_export'
+    'fontawesomefree',
+    'polymorphic',
+    'adminsortable2'
     'impersonate',
     'crispy_forms',
-    'jolling',
 ]
 
 ROOT_URLCONF = 'jolling.urls'
@@ -59,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'juntagrico.context_processors.vocabulary',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -99,7 +104,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'impersonate.middleware.ImpersonateMiddleware'
+    'impersonate.middleware.ImpersonateMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
 ]
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
@@ -140,11 +146,22 @@ IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
 
-LOGIN_REDIRECT_URL = "/my/home"
+IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
+
+LOGIN_REDIRECT_URL = "/"
 
 """
     File & Storage Settings
 """
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
+    },
+}
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 MEDIA_ROOT = 'media'
@@ -170,8 +187,10 @@ ORGANISATION_BANK_CONNECTION = {
             "BIC" : "GENODEF1VRR",
             "NAME" : "Volksbank Raiffeisenbank Rosenheim-Chiemsee eG",
             "ESR" : ""}
-INFO_EMAIL = "info@jolling.de"
-SERVER_URL = "www.jolling.de"
+CONTACTS = {
+    'general': "info@jolling.de"
+}
+ORGANISATION_WEBSITE = "www.jolling.de"
 ADMINPORTAL_NAME = "my.jolling.de"
 ADMINPORTAL_SERVER_URL = "my.jolling.de"
 SHARE_PRICE = "100"
