@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", 'False')=='True'
 
-ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science', 'localhost', 'jolling-staging.juntagrico.science']
+ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science', 'localhost']
 
 
 # Logging
@@ -218,3 +218,9 @@ ADMINPORTAL_NAME = "my.jolling.de"
 ADMINPORTAL_SERVER_URL = "my.jolling.de"
 SHARE_PRICE = "100"
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+
+
+# Staging
+if os.environ.get('JUNTAGRICO_STAGING') == '1':
+    ALLOWED_HOSTS.append('jolling-staging.juntagrico.science')
+    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
