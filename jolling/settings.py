@@ -3,6 +3,7 @@ Django settings for jolling project.
 """
 
 import os
+from juntagrico import defaults
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +15,31 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", 'False')=='True'
 
-ALLOWED_HOSTS = ['my.jolling.de','jolling.juntagrico.science', 'localhost',]
+if not DEBUG:
+    ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science']
+
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {'format': '[%(asctime)s] %(levelname)s %(message)s'}
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
+}
 
 
 # Application definition
@@ -26,11 +51,17 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+    'juntagrico.apps.JuntagricoAdminConfig',
+    'jolling',
     'juntagrico',
+    'import_export',
+    'polymorphic',
+    'adminsortable2',
     'impersonate',
     'crispy_forms',
-    'jolling',
+    'crispy_bootstrap4',
+    'django_select2',
+    'djrichtextfield',
 ]
 
 ROOT_URLCONF = 'jolling.urls'
@@ -59,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'juntagrico.context_processors.vocabulary',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -99,8 +131,11 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'impersonate.middleware.ImpersonateMiddleware'
+    'impersonate.middleware.ImpersonateMiddleware',
+    'django.contrib.sites.middleware.CurrentSiteMiddleware',
 ]
+
+EMAIL_BACKEND='juntagrico.backends.email.EmailBackend'
 
 EMAIL_HOST = os.environ.get('JUNTAGRICO_EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('JUNTAGRICO_EMAIL_USER')
@@ -108,9 +143,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('JUNTAGRICO_EMAIL_PASSWORD')
 EMAIL_PORT = int(os.environ.get('JUNTAGRICO_EMAIL_PORT', '25' ))
 EMAIL_USE_TLS = os.environ.get('JUNTAGRICO_EMAIL_TLS', 'False')=='True'
 EMAIL_USE_SSL = os.environ.get('JUNTAGRICO_EMAIL_SSL', 'False')=='True'
-
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-
 
 ADMINS = [
     ('Admin', os.environ.get('JUNTAGRICO_ADMIN_EMAIL')),
@@ -140,14 +172,31 @@ IMPERSONATE = {
     'REDIRECT_URL': '/my/profile',
 }
 
-LOGIN_REDIRECT_URL = "/my/home"
+IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
+
+LOGIN_REDIRECT_URL = "/"
 
 """
     File & Storage Settings
 """
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage',
+    },
+}
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 MEDIA_ROOT = 'media'
+
+"""
+     Richtext Settings
+"""
+
+DJRICHTEXTFIELD_CONFIG = defaults.richtextfield_config(LANGUAGE_CODE)
 
 """
      Crispy Settings
@@ -170,9 +219,17 @@ ORGANISATION_BANK_CONNECTION = {
             "BIC" : "GENODEF1VRR",
             "NAME" : "Volksbank Raiffeisenbank Rosenheim-Chiemsee eG",
             "ESR" : ""}
-INFO_EMAIL = "info@jolling.de"
-SERVER_URL = "www.jolling.de"
+CONTACTS = {
+    'general': "info@jolling.de"
+}
+ORGANISATION_WEBSITE = "www.jolling.de"
 ADMINPORTAL_NAME = "my.jolling.de"
 ADMINPORTAL_SERVER_URL = "my.jolling.de"
 SHARE_PRICE = "100"
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+
+
+# Staging
+if os.environ.get('JUNTAGRICO_STAGING') == '1':
+    ALLOWED_HOSTS.append('jolling-staging.juntagrico.science')
+    EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
