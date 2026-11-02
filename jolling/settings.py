@@ -16,7 +16,7 @@ SECRET_KEY = os.environ.get('JUNTAGRICO_SECRET_KEY')
 DEBUG = os.environ.get("JUNTAGRICO_DEBUG", 'False')=='True'
 
 if not DEBUG:
-    ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science']
+    ALLOWED_HOSTS = ['my.jolling.de', 'jolling.juntagrico.science', 'jolling.juntagrico.app']
 
 
 # Logging
